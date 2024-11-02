@@ -119,7 +119,7 @@
 
     async function search(val) {
       const res = await fetch(
-        "http://geocoding-api.open-meteo.com/v1/search?name=" + val
+        "https://geocoding-api.open-meteo.com/v1/search?name=" + val
       )
         .then((res) => res.json())
         .then((e) => e.results[0])
@@ -149,7 +149,7 @@
 
     function fetchTemp(long, lat) {
       return fetch(
-        `http://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current=temperature_2m`
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current=temperature_2m`
       )
         .then((res) => res.json())
         .then((e) => e.current.temperature_2m)
