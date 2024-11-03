@@ -24,9 +24,12 @@
         padding: 0;
         background: var(--bg);
         color: white;
-        font-size: calc(40vw - 80px);
+        font-size: calc(30vw - 80px);
         user-select: none;
         font-family: "Inter", sans-serif;
+      }
+      #secondNum {
+        font-size: 140px;
       }
       #clockContainer {
         height: 100vh;
@@ -59,7 +62,9 @@
   </head>
   <body>
     <div id="clockContainer">
-      <div id="clock"></div>
+      <div id="clock">
+        <span id="hourNum">0</span><span id="flasher">:</span><span id="minuteNum">00</span><span id="secondNum">.00</span>
+      </div>
       <div id="temp"></div>
     </div>
     <div class="controls">
@@ -78,6 +83,10 @@
     const hourColor = document.getElementById("hourColor");
     const minuteColor = document.getElementById("minuteColor");
     const tempEl = document.getElementById("temp");
+    
+    const hourNum = document.getElementById("hourNum");
+    const minuteNum = document.getElementById("minuteNum");
+    const secondNum = document.getElementById("secondNum");
 
     searchEl.value = localStorage.getItem("locationName") || "";
 
@@ -90,26 +99,29 @@
       render();
     });
 
-    let flasher = false;
+    hourColor.value = localStorage.getItem("hourColor") || "#ffffff";
+    minuteColor.value = localStorage.getItem("minuteColor") || "#ffffff";
     render();
     setInterval(() => {
       render();
     }, 1000);
+
 
     function render() {
       const now = new Date();
       const hour = now.getHours();
       const minute = now.getMinutes();
       const second = now.getSeconds();
-      hourColor.value = localStorage.getItem("hourColor") || "#ffffff";
-      minuteColor.value = localStorage.getItem("minuteColor") || "#ffffff";
 
-      flasher = !flasher;
-      clock.innerHTML = `<span id="hour">${hours12(hour)}</span>${
-        flasher ? ":" : "<span>&nbsp;</span>"
-      }<span id="minute">${pad(minute)}</span>`;
-      document.getElementById("hour").style.color = hourColor.value;
-      document.getElementById("minute").style.color = minuteColor.value;
+      
+
+      hourNum.innerHTML = hours12(hour);
+      minuteNum.innerHTML = pad(minute);
+      secondNum.innerHTML = "." + pad(second);
+
+
+      hourNum.style.color = hourColor.value;
+      minuteNum.style.color = minuteColor.value;
     }
     function pad(num) {
       return num.toString().padStart(2, "0");
