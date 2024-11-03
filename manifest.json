@@ -6,7 +6,7 @@
   "display": "fullScreen",
   "orientation": "",
   "scope": "/",
-  "start_url": "/",
+  "start_url": "https://supertigerdev.github.io/desk-clock/",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
