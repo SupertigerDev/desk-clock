@@ -96,6 +96,14 @@
   </body>
 
   <script>
+
+    try {
+      const wakeLock = await navigator.wakeLock.request("screen");
+    } catch (err) {
+      // the wake lock request fails - usually system related, such being low on battery
+      console.log(`${err.name}, ${err.message}`);
+    }
+
     const clock = document.getElementById("clock");
     const hourColor = document.getElementById("hourColor");
     const minuteColor = document.getElementById("minuteColor");
